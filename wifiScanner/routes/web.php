@@ -25,6 +25,20 @@ Route::get('/bot/getupdates', function() {
     return (json_encode($updates));
 });
 
-Route::prefix('wifiScanner')->group(function () {
+Route::prefix('wifiscanner')->group(function () {
     Route::get('/', [App\Http\Controllers\WifiScannerController::class, 'index'])->name('index');
 });
+
+// Laravel
+Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function () {
+    $update = Telegram::commandsHandler(true);
+
+    // Commands handler method returns an Update object.
+    // So you can further process $update object 
+    // to however you want.
+
+    return 'ok';
+});
+
+// Standalone
+// $update = $telegram->commandsHandler(true);

@@ -15,14 +15,14 @@ class WifiScannerController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://192.168.5.85/status');
+        $response = Http::get('http://192.168.129.215/status');
         $json = '[{"email":"john@doe.com"},{"email":"john@doe.com"}]';
         // return dd(substr_count($response->body(),","));
         // return dd(substr($response->body(),0, -2));
         // return dd();
         $wifiList = json_decode(str_replace("'", '"', $response->body()), true);
 
-        $botChatText = "";
+        $botChatText = "WiFi Status ";
 
         foreach ($wifiList as $key => $wifi) {
             // return dd($key);
