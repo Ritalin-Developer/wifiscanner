@@ -4,6 +4,9 @@
 
 This project is part of campus project, the main goal is to build WiFi scanner by using IoT module (NodeMCU 8266) to scan nearby area network and send the result to Telegram using Telegram Bot
 
+### Bot Telegram
+
+@WifiScannerRitalin_bot
 ### Contributor
 
 - [@ariebrainware](https://github.com/ariebrainware) (Muhamad Arie/1922021)
