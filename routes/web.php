@@ -33,9 +33,13 @@ Route::prefix('wifiscanner')->group(function () {
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $responseData = $request->getContent();
     $responseData = json_decode($responseData, true);
+    $filteredData = [];
     foreach ($responseData as $res) {
-        return dd($res['message']['entities'][0]['type']);
+        if ($res['message']['entities'][0]['type'] == 'bot_command') {
+            array_push($filteredData, $res);
+        }
     }
+    return dd($filteredData);
 });
 
 // Standalone
