@@ -26,7 +26,7 @@ class HelpCommand extends Command
     public function handle()
 
     {
-        $response = $this->getUpdate();
+        $response = [$this->getUpdate()];
 
         $text = "hello";
 
