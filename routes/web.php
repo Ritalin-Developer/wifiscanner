@@ -40,11 +40,13 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
         }
     }
     foreach ($filteredData as $data) {
-        return Telegram::sendMessage([
+        Telegram::sendMessage([
             'chat_id' => $data['message']['chat']['id'],
             'text' => 'saya ganteng'
         ]);
     }
+
+    return 'ok';
 });
 
 // Standalone
