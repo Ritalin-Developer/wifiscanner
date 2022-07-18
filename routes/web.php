@@ -31,22 +31,26 @@ Route::prefix('wifiscanner')->group(function () {
 
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
-    $responseData = Telegram::getUpdates();
-    $responseData = json_encode($responseData);
-    $responseData = json_decode($responseData, true);
-    $filteredData = [];
-    foreach ($responseData as $res) {
-        if (isset($res['message']['entities']) && $res['message']['entities'][0]['type'] == 'bot_command') {
-            array_push($filteredData, $res);
-        }
-    }
-    foreach ($filteredData as $data) {
+    // $responseData = Telegram::getUpdates();
+    // $responseData = json_encode($responseData);
+    // $responseData = json_decode($responseData, true);
+    // $filteredData = [];
+    // foreach ($responseData as $res) {
+    //     if (isset($res['message']['entities']) && $res['message']['entities'][0]['type'] == 'bot_command') {
+    //         array_push($filteredData, $res);
+    //     }
+    // }
+    // foreach ($filteredData as $data) {
+    //     Telegram::sendMessage([
+    //         'chat_id' => $data['message']['chat']['id'],
+    //         'text' => 'saya ganteng'
+    //     ]);
+    // }
         Telegram::sendMessage([
-            'chat_id' => $data['message']['chat']['id'],
+            // 'chat_id' => $data['message']['chat']['id'],
+            'chat_id' => '-1001741565449',
             'text' => 'saya ganteng'
         ]);
-    }
-
     return 'ok';
 });
 
