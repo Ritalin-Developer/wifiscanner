@@ -38,8 +38,8 @@ return [
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'https://ritalin-wifiscanner.herokuapp.com/start'),
             'commands'            => [
-                // Telegram\Bot\Commands\HelpCommand::class,
-                App\Http\Controllers\StartCommand::class,
+                Telegram\Bot\Commands\HelpCommand::class,
+                // App\Http\Controllers\StartCommand::class,
             ],
         ],
 
