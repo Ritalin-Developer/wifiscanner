@@ -35,7 +35,7 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
     $responseData = json_decode($responseData, true);
     $filteredData = [];
     foreach ($responseData as $res) {
-        if ($res['message']['entities'][0]['type'] == 'bot_command') {
+        if (isset($res['message']['entities']) && $res['message']['entities'][0]['type'] == 'bot_command') {
             array_push($filteredData, $res);
         }
     }
