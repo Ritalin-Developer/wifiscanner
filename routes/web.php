@@ -39,7 +39,12 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
             array_push($filteredData, $res);
         }
     }
-    return dd($filteredData);
+    foreach ($filteredData as $data) {
+        return Telegram::sendMessage([
+            'chat_id' => '-1001741565449',
+            'text' => $botChatText
+        ]);
+    }
 });
 
 // Standalone
