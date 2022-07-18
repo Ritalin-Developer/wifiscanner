@@ -32,33 +32,18 @@ Route::prefix('wifiscanner')->group(function () {
 
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
-    // $responseData = Telegram::getUpdates();
-    // $responseData = json_encode($responseData);
-    // $responseData = json_decode($responseData, true);
-    // $filteredData = [];
-    // foreach ($responseData as $res) {
-    //     if (isset($res['message']['entities']) && $res['message']['entities'][0]['type'] == 'bot_command') {
-    //         array_push($filteredData, $res);
-    //     }
-    // }
-    // foreach ($filteredData as $data) {
-    //     Telegram::sendMessage([
-    //         'chat_id' => $data['message']['chat']['id'],
-    //         'text' => 'saya ganteng'
-    //     ]);
-    // }
     $response = json_decode($request->getContent(), true);
-    if ($response['text'] == '//start') {
+    if ($response['message']['text'] == '/start') {
         $data = [
             'chat_id' => $response['message']['chat']['id'],
             'text' => 'kita start ya..'
         ];
-    } else if ($response['text'] == '/stop') {
+    } else if ($response['message']['text'] == '/stop') {
         $data = [
             'chat_id' => $response['message']['chat']['id'],
             'text' => 'kita stop ya..'
         ];
-    } else if ($response['text'] == '/help') {
+    } else if ($response['message']['text'] == '/help') {
         $data = [
             'chat_id' => $response['message']['chat']['id'],
             'text' => 'kita bantu ya..'
@@ -70,7 +55,7 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
     //     'chat_id' => '-1001741565449',
     //     'text' => $response['message']['chat']['id'],
     // ]);
-    // return 'ok';
+    return 'ok';
 });
 
 // Standalone
