@@ -22,8 +22,8 @@ Route::get('/', function () {
 
 Route::get('/bot/getupdates', function() {
     $data = '{"update_id":230189155,"message":{"message_id":93,"from":{"id":1024615671,"is_bot":false,"first_name":"Ricky","username":"Rickyfishboy","language_code":"en"},"chat":{"id":-1001741565449,"title":"Ritalin_wifi_scanner","type":"supergroup"},"date":1658127871,"text":"/help","entities":[{"offset":0,"length":5,"type":"bot_command"}]}}';
-
-    return json_decode($data, true);
+    $data = json_decode($data, true);
+    return $data['message'];
 });
 
 Route::prefix('wifiscanner')->group(function () {
