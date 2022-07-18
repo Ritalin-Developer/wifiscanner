@@ -30,12 +30,8 @@ Route::prefix('wifiscanner')->group(function () {
 });
 
 // Laravel
-Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function () {
+Route::post('/start', function () {
     $update = Telegram::commandsHandler(true);
-
-    // Commands handler method returns an Update object.
-    // So you can further process $update object 
-    // to however you want.
 
     return 'ok';
 });
