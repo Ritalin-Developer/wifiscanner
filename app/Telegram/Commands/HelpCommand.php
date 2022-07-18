@@ -28,7 +28,7 @@ class HelpCommand extends Command
     /**
      * {@inheritdoc}
      */
-    public function handle($arguments)
+    public function handle()
 
     {
         $response = $this->getUpdate();
