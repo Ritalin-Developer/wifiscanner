@@ -32,7 +32,7 @@ Route::prefix('wifiscanner')->group(function () {
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
 
-    return dd($request->getContent());
+    return dd($request->getContent()[-1]);
 });
 
 // Standalone
