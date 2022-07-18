@@ -30,10 +30,8 @@ Route::prefix('wifiscanner')->group(function () {
 });
 
 // Laravel
-Route::post('/start', function () {
+Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function () {
     $update = Telegram::commandsHandler(true);
-
-    return 'ok';
 });
 
 // Standalone
