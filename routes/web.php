@@ -31,7 +31,8 @@ Route::prefix('wifiscanner')->group(function () {
 
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
-    $responseData = $request->getContent();
+    $responseData = Telegram::getUpdates();
+    $responseData = json_encode($responseData);
     $responseData = json_decode($responseData, true);
     $filteredData = [];
     foreach ($responseData as $res) {
