@@ -37,15 +37,10 @@ return [
             'token'               => env('TELEGRAM_BOT_TOKEN', '5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'https://ritalin-wifiscanner.herokuapp.com/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook'),
-            'commands'            => array(App\Telegram\Commands\HelpCommand::class)
-
-                // App\Http\Controllers\StartCommand::class,
-        ],
-
-        //        'mySecondBot' => [
-        //            'username'  => 'AnotherTelegram_Bot',
-        //            'token' => '123456:abc',
-        //        ],
+            'commands'            => [
+                App\Telegram\Commands\HelpCommand::class,
+            ]
+        ]
     ],
 
     /*
