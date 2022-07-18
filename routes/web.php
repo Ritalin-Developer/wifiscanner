@@ -46,11 +46,25 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
     //         'text' => 'saya ganteng'
     //     ]);
     // }
-        Telegram::sendMessage([
-            // 'chat_id' => $data['message']['chat']['id'],
-            'chat_id' => '-1001741565449',
-            'text' => $request->getContent()
-        ]);
+    $response = json_decode($request->getContent());
+    if ($response['text'] == 'start') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita start ya..'
+        ];
+    } else if ($response['text'] == 'stop') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita stop ya..'
+        ];
+    } else if ($response['text'] == 'help') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita bantu ya..'
+        ];
+    }
+
+        Telegram::sendMessage($data);
     return 'ok';
 });
 
