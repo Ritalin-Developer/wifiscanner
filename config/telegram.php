@@ -40,7 +40,7 @@ return [
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'https://ritalin-wifiscanner.herokuapp.com/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook'),
             'commands'            => [
-                [App\Telegram\Commands\HelpCommand::class],
+                App\Telegram\Commands\HelpCommand::class,
             ]
         ]
     ],
