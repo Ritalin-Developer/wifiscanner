@@ -32,29 +32,29 @@ Route::prefix('wifiscanner')->group(function () {
 
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
-    // $response = json_decode($request->getContent(), true);
-    // if ($response['message']['text'] == '/start') {
-    //     $data = [
-    //         'chat_id' => $response['message']['chat']['id'],
-    //         'text' => 'kita start ya..'
-    //     ];
-    // } else if ($response['message']['text'] == '/stop') {
-    //     $data = [
-    //         'chat_id' => $response['message']['chat']['id'],
-    //         'text' => 'kita stop ya..'
-    //     ];
-    // } else if ($response['message']['text'] == '/help') {
-    //     $data = [
-    //         'chat_id' => $response['message']['chat']['id'],
-    //         'text' => 'kita bantu ya..'
-    //     ];
-    // }
+    $response = json_decode($request->getContent(), true);
+    if ($response['message']['text'] == '/start') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita start ya..'
+        ];
+    } else if ($response['message']['text'] == '/stop') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita stop ya..'
+        ];
+    } else if ($response['message']['text'] == '/help') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'kita bantu ya..'
+        ];
+    }
 
-    // Telegram::sendMessage($data);
-    Telegram::sendMessage([
-        'chat_id' => '-1001741565449',
-        'text' => $request->getContent(),
-    ]);
+    Telegram::sendMessage($data);
+    // Telegram::sendMessage([
+    //     'chat_id' => '-1001741565449',
+    //     'text' => $request->getContent(),
+    // ]);
     return 'ok';
 });
 
