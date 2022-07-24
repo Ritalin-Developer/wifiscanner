@@ -33,38 +33,39 @@ Route::prefix('wifiscanner')->group(function () {
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $response = json_decode($request->getContent(), true);
-    return dd($response);
-    if ($response['message']['text'] == '/start') {
-        $response = Http::get('http://10.30.23.61/status');
-        $wifiList = json_decode(str_replace("'", '"', $response->body()), true);
+    foreach ($response as $responseData) {
+        if ($responseData['message']['text'] == '/start') {
+            $response = Http::get('http://10.30.23.61/status');
+            $wifiList = json_decode(str_replace("'", '"', $response->body()), true);
 
-        $botChatText = "WiFi Status ";
+            $botChatText = "WiFi Status ";
 
-        foreach ($wifiList as $key => $wifi) {
-            $botChatText = $botChatText.($key + 1)."\n";
-            $botChatText = $botChatText."SSID : ".$wifi["SSID"]."\n";
-            $botChatText = $botChatText."RSSI : ".$wifi["RSSI"]."\n";
-            $botChatText = $botChatText."MAC : ".$wifi["MAC"]."\n";
-            $botChatText = $botChatText.$wifi["isSecured"]."\n\n";
+            foreach ($wifiList as $key => $wifi) {
+                $botChatText = $botChatText.($key + 1)."\n";
+                $botChatText = $botChatText."SSID : ".$wifi["SSID"]."\n";
+                $botChatText = $botChatText."RSSI : ".$wifi["RSSI"]."\n";
+                $botChatText = $botChatText."MAC : ".$wifi["MAC"]."\n";
+                $botChatText = $botChatText.$wifi["isSecured"]."\n\n";
+            }
+
+            $data = [
+                'chat_id' => $responseData['message']['chat']['id'],
+                'text' => $botChatText
+            ];
+        } else if ($responseData['message']['text'] == '/stop') {
+            $data = [
+                'chat_id' => $responseData['message']['chat']['id'],
+                'text' => 'kita stop ya..'
+            ];
+        } else if ($responseData['message']['text'] == '/help') {
+            $data = [
+                'chat_id' => $responseData['message']['chat']['id'],
+                'text' => 'kita bantu ya..'
+            ];
         }
 
-        $data = [
-            'chat_id' => $response['message']['chat']['id'],
-            'text' => $botChatText
-        ];
-    } else if ($response['message']['text'] == '/stop') {
-        $data = [
-            'chat_id' => $response['message']['chat']['id'],
-            'text' => 'kita stop ya..'
-        ];
-    } else if ($response['message']['text'] == '/help') {
-        $data = [
-            'chat_id' => $response['message']['chat']['id'],
-            'text' => 'kita bantu ya..'
-        ];
+        Telegram::sendMessage($data);
     }
-
-    Telegram::sendMessage($data);
     return 'ok';
 });
 
