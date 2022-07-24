@@ -52,19 +52,21 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
                 'chat_id' => $responseData['message']['chat']['id'],
                 'text' => $botChatText
             ];
+            Telegram::sendMessage($data);
         } else if ($responseData['message']['text'] == '/stop') {
             $data = [
                 'chat_id' => $responseData['message']['chat']['id'],
                 'text' => 'kita stop ya..'
             ];
+            Telegram::sendMessage($data);
         } else if ($responseData['message']['text'] == '/help') {
             $data = [
                 'chat_id' => $responseData['message']['chat']['id'],
                 'text' => 'kita bantu ya..'
             ];
+            Telegram::sendMessage($data);
         }
 
-        Telegram::sendMessage($data);
     }
     return 'ok';
 });
