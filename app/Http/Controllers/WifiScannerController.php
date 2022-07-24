@@ -15,7 +15,7 @@ class WifiScannerController extends Controller
      */
     public function index()
     {
-        $response = Http::get('http://192.168.129.215/status');
+        $response = Http::get('http://10.30.23.61/status');
         $json = '[{"email":"john@doe.com"},{"email":"john@doe.com"}]';
         // return dd(substr_count($response->body(),","));
         // return dd(substr($response->body(),0, -2));
