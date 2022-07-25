@@ -36,11 +36,11 @@ Route::prefix('wifiscanner')->group(function () {
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $response = json_decode($request->getContent(), true);
-    Telegram::sendMessage([
-        'chat_id' => $response['message']['chat']['id'],
-        'text' => 'remove pending request'
-    ]);
-    return 'ok';
+    // Telegram::sendMessage([
+    //     'chat_id' => $response['message']['chat']['id'],
+    //     'text' => 'remove pending request'
+    // ]);
+    // return 'ok';
     if (str_contains($response['message']['text'], '/start')) {
         $dataPull = Http::get('http://'.env('NODEMCU_IP').'/status');
         $wifiList = json_decode(str_replace("'", '"', $dataPull->body()), true);
