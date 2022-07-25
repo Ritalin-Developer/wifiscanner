@@ -37,7 +37,7 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
 
     if ($response['message']['text'] == '/start') {
         $data = [
-            'chat_id' => '-1001741565449',
+            'chat_id' => $response['message']['chat']['id'],
             'text' => 'aaaaaa'
         ];
     }
