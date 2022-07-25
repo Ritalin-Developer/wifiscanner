@@ -34,11 +34,14 @@ Route::prefix('wifiscanner')->group(function () {
 // Laravel
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $response = json_decode($request->getContent(), true);
-    return dd($response);
-    $data = [
-        'chat_id' => '-1001741565449',
-        'text' => 'aaaaaa'
-    ];
+
+    if ($response['message']['text'] == '/start') {
+        $data = [
+            'chat_id' => '-1001741565449',
+            'text' => 'aaaaaa'
+        ];
+    }
+
     // if ($response['message']['text'] == '/start') {
     //     $response = Http::get('http://10.30.23.61/status');
     //     $wifiList = json_decode(str_replace("'", '"', $response->body()), true);
