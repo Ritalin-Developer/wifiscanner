@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WifiScannerController;
 use Illuminate\Http\Request;
 use Telegram as Telegram;
+use Illuminate\Support\Facades\Http;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +38,37 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
     $response = json_decode($request->getContent(), true);
 
     if ($response['message']['text'] == '/start') {
+        $dataPull = Http::get('http://'.env('NODEMCU_IP').'/status');
+        $wifiList = json_decode(str_replace("'", '"', $dataPull->body()), true);
+        $botChatText = "WiFi Status ";
+
+        foreach ($wifiList as $key => $wifi) {
+            $botChatText = $botChatText.($key + 1)."\n";
+            $botChatText = $botChatText."SSID : ".$wifi["SSID"]."\n";
+            $botChatText = $botChatText."RSSI : ".$wifi["RSSI"]."\n";
+            $botChatText = $botChatText."MAC : ".$wifi["MAC"]."\n";
+            $botChatText = $botChatText.$wifi["isSecured"]."\n\n";
+        }
         $data = [
             'chat_id' => $response['message']['chat']['id'],
-            'text' => 'aaaaaa'
+            'text' => $botChatText
         ];
+
+        Telegram::sendMessage($data);
+    } else if ($response['message']['text'] == '/stop') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => 'Stop Scanning Wifi'
+        ];
+        Telegram::sendMessage($data);
+        return 'ok';
+    } else if ($response['message']['text'] == '/help') {
+        $data = [
+            'chat_id' => $response['message']['chat']['id'],
+            'text' => '/start command to start scanning wifi, /stop to stop scanning wifi.'
+        ];
+        Telegram::sendMessage($data);
+        return 'ok';
     }
 
     // if ($response['message']['text'] == '/start') {
@@ -72,8 +101,8 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
     //     ];
     // }
 
-    Telegram::sendMessage($data);
-    return 'ok';
+    // Telegram::sendMessage($data);
+    // return 'ok';
 });
 
 // Standalone
