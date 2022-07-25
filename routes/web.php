@@ -35,7 +35,7 @@ Route::prefix('wifiscanner')->group(function () {
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $response = json_decode($request->getContent(), true);
     $data = [
-        'chat_id' => -1001741565449,
+        'chat_id' => '-1001741565449',
         'text' => 'aaaaaa'
     ];
     // if ($response['message']['text'] == '/start') {
