@@ -37,7 +37,7 @@ Route::prefix('wifiscanner')->group(function () {
 Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function (Request $request) {
     $response = json_decode($request->getContent(), true);
 
-    if ($response['message']['text'] == '/start') {
+    if (str_contains($response['message']['text'], '/start')) {
         $dataPull = Http::get('http://'.env('NODEMCU_IP').'/status');
         $wifiList = json_decode(str_replace("'", '"', $dataPull->body()), true);
         $botChatText = "WiFi Status ";
@@ -55,14 +55,14 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
         ];
 
         Telegram::sendMessage($data);
-    } else if ($response['message']['text'] == '/stop') {
+    } else if (str_contains($response['message']['text'], '/stop')) {
         $data = [
             'chat_id' => $response['message']['chat']['id'],
             'text' => 'Stop Scanning Wifi'
         ];
         Telegram::sendMessage($data);
         return 'ok';
-    } else if ($response['message']['text'] == '/help') {
+    } else if (str_contains($response['message']['text'], '/help')) {
         $data = [
             'chat_id' => $response['message']['chat']['id'],
             'text' => '/start command to start scanning wifi, /stop to stop scanning wifi.'
