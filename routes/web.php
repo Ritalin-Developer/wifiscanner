@@ -23,8 +23,8 @@ Route::get('/', function () {
 Route::get('/bot/getupdates', function() {
     $data = '{"update_id":230189237,"message":{"message_id":127,"from":{"id":1024615671,"is_bot":false,"first_name":"Ricky","username":"Rickyfishboy","language_code":"en"},"chat":{"id":1024615671,"first_name":"Ricky","username":"Rickyfishboy","type":"private"},"date":1658742731,"text":"/stop","entities":[{"offset":0,"length":5,"type":"bot_command"}]}}';
     $data = json_decode($data, true);
-    return dd($data);
-    // return dd($data['message']['chat']['id'], $data['message']['text']);
+    // return dd($data);
+    return dd($data['message']['chat']['id'], $data['message']['text']);
 });
 
 Route::prefix('wifiscanner')->group(function () {
@@ -54,7 +54,7 @@ Route::post('/5465295406:AAH_GzsIj6xd2IPukMhK-c1GJzpQQpCWHm0/webhook', function 
         ];
     } else if ($response['message']['text'] == '/stop') {
         $data = [
-            'chat_id' => $response['message']['chat']['id'],
+            'chat_id' => $response['message']['from']['id'],
             'text' => 'kita stop ya..'
         ];
     } else if ($response['message']['text'] == '/help') {
