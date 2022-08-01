@@ -26,11 +26,12 @@ class WifiScannerController extends Controller
 
         foreach ($wifiList as $key => $wifi) {
             // return dd($key);
-            $botChatText = $botChatText.($key + 1)."\n";
+            $botChatText = $botChatText."\n";
+            $botChatText = $botChatText.($key)."\n";
             $botChatText = $botChatText."SSID : ".$wifi["SSID"]."\n";
             $botChatText = $botChatText."RSSI : ".$wifi["RSSI"]."\n";
             $botChatText = $botChatText."MAC : ".$wifi["MAC"]."\n";
-            $botChatText = $botChatText.$wifi["isSecured"]."\n\n";
+            $botChatText = $botChatText.$wifi["isSecured"]."\n";
         }
 
         Telegram::sendMessage([
